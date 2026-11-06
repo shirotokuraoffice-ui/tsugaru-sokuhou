@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LINEの使い方・Q&A | つがる市農産物直売所</title>
+  <style>
+    :root {
+      --primary: #1b7a43;
+      --bg: #f4f6f5;
+      --card-bg: #ffffff;
+      --text: #333333;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      margin: 0;
+      padding: 16px;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .header h1 {
+      font-size: 1.25rem;
+      margin: 0 0 6px;
+      color: var(--primary);
+    }
+    .header p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #666;
+    }
+    .section-title {
+      font-size: 1rem;
+      font-weight: bold;
+      margin: 22px 0 10px;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-left: 4px solid var(--primary);
+      padding-left: 8px;
+    }
+    .guide-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .guide-card-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+      font-weight: bold;
+      font-size: 0.98rem;
+      color: #222;
+    }
+    .badge-icon {
+      background: #e8f5e9;
+      color: var(--primary);
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .guide-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.5;
+    }
+    details {
+      background: var(--card-bg);
+      border-radius: 10px;
+      margin-bottom: 8px;
+      padding: 12px 14px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    summary {
+      font-weight: bold;
+      font-size: 0.92rem;
+      cursor: pointer;
+      color: #222;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    summary::-webkit-details-marker {
+      display: none;
+    }
+    summary::after {
+      content: "＋";
+      font-size: 1rem;
+      color: var(--primary);
+      font-weight: bold;
+    }
+    details[open] summary::after {
+      content: "−";
+    }
+    details p {
+      margin: 10px 0 0;
+      color: #555;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      border-top: 1px dashed #eee;
+      padding-top: 8px;
+    }
+    .tel-card {
+      margin-top: 24px;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .tel-card p {
+      margin: 0 0 10px;
+      font-size: 0.85rem;
+      color: #666;
+    }
+    .tel-btn {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      background-color: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 14px 0;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(27,122,67,0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>📖 出荷者用LINE 使い方・Q&A</h1>
+    <p>つがる市農産物直売所（じょっぱりの里）</p>
+  </div>
+
+  <div class="section-title">メニューボタンの使い方</div>
+  
+  <div class="guide-card">
+    <div class="guide-card-head">
+      <span class="badge-icon">📢</span>
+      <span>お知らせ</span>
+    </div>
+    <p>店舗の営業時間の変更、直売所イベント、出荷や荷受けに関する重要連絡をいつでもご確認いただけます。</p>
+  </div>
+
+  <div class="guide-card">
+    <div class="guide-card-head">
+      <span class="badge-icon">📣</span>
+      <span>今日の売れ筋と欠品・品薄情報</span>
+    </div>
+    <p>店舗スタッフが日々の売れ行き状況を更新しています。売れ筋品目や、棚が空いていて追加出荷をお願いしたい品目がひと目で分かります。</p>
+  </div>
+
+  <div class="guide-card">
+    <div class="guide-card-head">
+      <span class="badge-icon">📅</span>
+      <span>カレンダー</span>
+    </div>
+    <p>タップすると今月の営業カレンダー画像がトーク画面に届きます。定休日や売り出し日、イベント予定の確認にご活用ください。</p>
+  </div>
+
+  <div class="guide-card">
+    <div class="guide-card-head">
+      <span class="badge-icon">📞</span>
+      <span>店舗へ連絡</span>
+    </div>
+    <p>タップすると直売所レジ直通の電話（0173-25-2865）を発信できます。急ぎの確認やお問合せにご利用ください。</p>
+  </div>
+
+  <div class="section-title">よくある質問（Q&A）</div>
+
+  <details>
+    <summary>Q. 個別トークでメッセージを送ってもいいですか？</summary>
+    <p>A. はい。出荷に関する連絡や相談など、通常のLINEと同じようにメッセージをお送りいただけます。店舗スタッフが確認次第ご返信いたします（接客中や混雑時は確認が遅れる場合がございます）。</p>
+  </details>
+
+  <details>
+    <summary>Q. 速報は1日に何回更新されますか？</summary>
+    <p>A. 原則として午前と午後の巡回・レジ集計タイミングに合わせて店舗スタッフが更新します。</p>
+  </details>
+
+  <details>
+    <summary>Q. メニューが隠れて見えなくなりました</summary>
+    <p>A. トーク画面の最下部にある「メニューを開く／閉じる」と書かれた帯をタップすると、再度メニュー画面が表示されます。</p>
+  </details>
+
+  <div class="tel-card">
+    <p>ご不明な点はお気軽に店舗までお電話ください</p>
+    <a href="tel:0173252865" class="tel-btn">📞 店舗へ電話する（0173-25-2865）</a>
+  </div>
+</body>
+</html>
