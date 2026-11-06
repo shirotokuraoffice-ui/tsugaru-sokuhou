@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>今日の売れ筋・欠品速報 | つがる市農産物直売所</title>
+  <style>
+    :root {
+      --primary: #1b7a43;
+      --alert: #d32f2f;
+      --bg: #f8faf9;
+      --card-bg: #ffffff;
+      --text: #333333;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      margin: 0; padding: 16px; background-color: var(--bg); color: var(--text); line-height: 1.5;
+    }
+    .header { text-align: center; margin-bottom: 16px; }
+    .header h1 { font-size: 1.3rem; margin: 0 0 4px; color: var(--primary); }
+    .update-time { font-size: 0.85rem; color: #666; }
+    .card {
+      background: var(--card-bg); border-radius: 12px; padding: 16px; margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .card-title {
+      font-size: 1.1rem; font-weight: bold; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+    }
+    .card.popular { border-top: 4px solid var(--primary); }
+    .card.popular .card-title { color: var(--primary); }
+    .card.shortage { border-top: 4px solid var(--alert); }
+    .card.shortage .card-title { color: var(--alert); }
+    .item-list { list-style: none; padding: 0; margin: 0; }
+    .item-list li {
+      padding: 10px 12px; border-bottom: 1px solid #eee; font-size: 1rem; font-weight: 500;
+    }
+    .item-list li:last-child { border-bottom: none; }
+    .message-box {
+      background: #fff8e1; border-left: 4px solid #ffa000; padding: 12px 14px; border-radius: 4px; font-size: 0.95rem; margin-top: 8px;
+    }
+    .loading { text-align: center; padding: 30px; font-weight: bold; color: #888; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>つがる市農産物直売所</h1>
+    <div id="updateTime" class="update-time">読み込み中...</div>
+  </div>
+
+  <div id="content" style="display: none;">
+    <div class="card popular">
+      <div class="card-title">🔥 いま売れてるもの</div>
+      <ul id="popularList" class="item-list"></ul>
+    </div>
+
+    <div class="card shortage">
+      <div class="card-title">📦 欠品・品薄（急募中！）</div>
+      <ul id="shortageList" class="item-list"></ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📢 店舗からのお願い・連絡</div>
+      <div id="shopMessage" class="message-box"></div>
+    </div>
+  </div>
+
+  <div id="loading" class="loading">最新情報を取得中...</div>
+
+  <script>
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbzqeZtrL-ckvMdNRKJ6DVD2ctv_uwC6YA-1H9xv1aftnxl0KBvSbHq7YoiRQyzT6q4z/exec";
+
+    fetch(GAS_URL)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("content").style.display = "block";
+        document.getElementById("updateTime").textContent = "最終更新: " + (data.lastUpdate || "本日");
+
+        const popList = document.getElementById("popularList");
+        popList.innerHTML = (data.popularItems && data.popularItems.length)
+          ? data.popularItems.map(item => `<li>${item}</li>`).join('')
+          : "<li>現在登録はありません</li>";
+
+        const shortList = document.getElementById("shortageList");
+        shortList.innerHTML = (data.shortageItems && data.shortageItems.length)
+          ? data.shortageItems.map(item => `<li>${item}</li>`).join('')
+          : "<li>現在品薄・急募商品はありません</li>";
+
+        document.getElementById("shopMessage").textContent = data.shopMessage || "本日も新鮮な出荷をお待ちしております！";
+      })
+      .catch(err => {
+        document.getElementById("loading").textContent = "データの読み込みに失敗しました。時間をおいて再読み込みしてください。";
+      });
+  </script>
+</body>
+</html>

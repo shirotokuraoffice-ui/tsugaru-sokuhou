@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>店舗からのお知らせ | つがる市農産物直売所</title>
+  <style>
+    :root {
+      --primary: #1b7a43;
+      --bg: #f8faf9;
+      --card-bg: #ffffff;
+      --text: #333333;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      margin: 0; padding: 16px; background-color: var(--bg); color: var(--text); line-height: 1.6;
+    }
+    .header { text-align: center; margin-bottom: 20px; }
+    .header h1 { font-size: 1.25rem; margin: 0; color: var(--primary); }
+    .news-card {
+      background: var(--card-bg); border-radius: 12px; padding: 16px; margin-bottom: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .news-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .news-date { font-size: 0.85rem; color: #777; }
+    .badge {
+      font-size: 0.75rem; padding: 2px 8px; border-radius: 4px; font-weight: bold;
+    }
+    .badge-important { background-color: #ffebee; color: #c62828; }
+    .badge-normal { background-color: #e8f5e9; color: #2e7d32; }
+    .news-title { font-size: 1.05rem; font-weight: bold; margin-bottom: 8px; color: #111; }
+    .news-body { font-size: 0.95rem; color: #444; white-space: pre-wrap; }
+    .loading { text-align: center; padding: 30px; font-weight: bold; color: #888; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>📢 店舗からのお知らせ一覧</h1>
+  </div>
+
+  <div id="loading" class="loading">お知らせを取得中...</div>
+  <div id="newsContainer"></div>
+
+  <script>
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbzqeZtrL-ckvMdNRKJ6DVD2ctv_uwC6YA-1H9xv1aftnxl0KBvSbHq7YoiRQyzT6q4z/exec?type=news";
+
+    fetch(GAS_URL)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("loading").style.display = "none";
+        const container = document.getElementById("newsContainer");
+        if (!data.news || data.news.length === 0) {
+          container.innerHTML = "<p style='text-align:center;'>現在お知らせはありません。</p>";
+          return;
+        }
+
+        container.innerHTML = data.news.map(item => `
+          <div class="news-card">
+            <div class="news-meta">
+              <span class="news-date">${item.date}</span>
+              <span class="badge ${item.isImportant ? 'badge-important' : 'badge-normal'}">
+                ${item.isImportant ? '重要' : '案内'}
+              </span>
+            </div>
+            <div class="news-title">${item.title}</div>
+            <div class="news-body">${item.body}</div>
+          </div>
+        `).join('');
+      })
+      .catch(err => {
+        document.getElementById("loading").textContent = "お知らせの読み込みに失敗しました。";
+      });
+  </script>
+</body>
+</html>
